@@ -1,0 +1,58 @@
+{
+  "pages": [
+    
+    "page/booking/qrBookingList",
+    
+    "page/me/me",
+    "page/me/update",
+    
+    "page/me/help",
+    "page/me/about",
+    
+    "page/booking/qrBookingNew",
+    "page/booking/qrBookingDetails",
+    "page/booking/showMyQrcode",
+    "page/booking/memo1",
+    "page/booking/memo2_1",
+    "page/booking/qrMemo2",
+    "page/me/settingPropClass",
+    "page/me/comment",
+    "page/test/index",
+    "page/me/reply",
+    "page/booking/qrBookingTime",
+    "page/me/settingTime"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#dddddd",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "page/booking/qrBookingList",
+        "iconPath": "image/list.png",
+        "selectedIconPath": "image/listHL.png",
+        "text": "预约历史"
+      },
+      {
+        "pagePath": "page/me/me",
+        "iconPath": "image/user.png",
+        "selectedIconPath": "image/userHL.png",
+        "text": "我"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 6000,
+    "connectSocket": 6000,
+    "uploadFile": 6000,
+    "downloadFile": 6000
+  }
+}

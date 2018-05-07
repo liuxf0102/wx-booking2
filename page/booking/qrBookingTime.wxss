@@ -1,0 +1,250 @@
+/* page/booking/qrBookingTime.wxss */
+/* pages/booking/bookingList.wxss */
+
+.title {
+  
+  font-size: 38rpx;
+  padding-top: 20rpx;
+}
+
+.sub_title {
+  
+  font-size: 28rpx;
+  color: darkgrey;
+}
+
+.content {
+  padding-left: 10px;
+  
+  font-size: 36rpx;
+  color: #1aad19;
+}
+
+.bottom {
+  padding-left: 10px;
+  padding-bottom: 20rpx;
+  
+  font-size: 28rpx;
+  text-align: center;
+  color: darkgrey;
+}
+
+.button-line {
+  display: flex;
+  padding: 10rpx 10rpx;
+  border-top: 1rpx solid #eee;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 42rpx;
+}
+
+.view-button {
+  border: 4rpx solid #eee;
+  padding: 2rpx;
+  width: 100rpx;
+  align-content: center;
+  align-items: center;
+}
+
+.view-button-selected {
+  background: greenyellow;
+  border: 4rpx solid #eee;
+  padding: 2rpx;
+  width: 100rpx;
+  align-content: center;
+  align-items: center;
+}
+
+.view-button-today {
+  background-image: url('https://www.4exam.cn/images/today.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 98% 98%;
+  border: 4rpx solid #eee;
+  padding: 2rpx;
+  width: 100rpx;
+  align-content: center;
+  align-items: center;
+}
+
+.view-weekday {
+  border: 0px solid blue;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0rpx;
+  margin: 0rpx;
+  line-height: 42rpx;
+}
+
+.text-weekday {
+  border: 0px solid blue;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 36rpx;
+  padding: 0rpx;
+  margin: 0rpx;
+  line-height: 42rpx;
+  font-weight: 700;
+}
+
+.text-weekday-flag {
+  border: 0px solid blue;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  color: #888;
+  font-size: 20rpx;
+}
+
+.view-day {
+  border: 0px solid #eee;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 32rpx;
+  padding: 0rpx;
+  margin: 0rpx;
+  line-height: 42rpx;
+}
+
+.view-day-booking {
+  border: 0px solid #eee;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 32rpx;
+  padding: 0rpx;
+  margin: 0rpx;
+  line-height: 42rpx;
+}
+
+.text-day-count {
+  font-size: 32rpx;
+  color: black;
+  padding: 0rpx;
+  margin: 0rpx;
+}
+
+.text-day-count-red {
+  font-size: 32rpx;
+  color: red;
+  padding: 0rpx;
+  margin: 0rpx;
+}
+
+.text-day-count-blue {
+  font-size: 32rpx;
+  color: blue;
+  padding: 0rpx;
+  margin: 0rpx;
+}
+
+.text-status {
+  font-size: 26rpx;
+  color: #888;
+  padding-top: 10rpx;
+}
+
+.text-status-finished {
+  font-size: 26rpx;
+  color: black;
+  padding-top: 10rpx;
+}
+
+.text-bold-0 {
+  font-weight: 400;
+}
+
+.text-bold-1 {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.text-bold-2 {
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.text-bold-3 {
+  font-size: 38rpx;
+  font-weight: 700;
+}
+
+.text-bold-4 {
+  font-size: 40rpx;
+  font-weight: 900;
+}
+
+.text-color-pending-approval-0 {
+  
+  padding: 0rpx;
+  margin: 0rpx;
+}
+
+.text-color-pending-approval-1 {
+  color: red;
+  padding: 0rpx;
+  margin: 0rpx;
+}
+
+.text-color-unfinished-0 {
+  
+  padding: 0rpx;
+  margin: 0rpx;
+}
+
+.text-color-unfinished-1 {
+  color:#888;
+  padding: 0rpx;
+  margin: 0rpx;
+}
+.text-week{
+  font-size: 32rpx;
+  color: black;
+  padding-top: 4rpx;
+}
+.bgcolor_eee {
+  background-color: #eee
+}
+.bgcolor_1 {
+  background-color:darkgrey
+}
+
+.view-left {
+  float: left;
+  text-align: center;
+  margin-right: 20rpx;
+
+}
+
+.memo1 {
+  font-size: 30rpx;
+  color: black;
+  padding-top: 10rpx;
+}
+
+.text-red {
+  font-size: 32rpx;
+  color: red;
+  padding-top: 2rpx;
+}
+
+.text-black {
+  font-size: 32rpx;
+  color: black;
+  padding-top: 2rpx;
+}
+.action-red{
+  color: red;
+}
+.action-green{
+  color: green;
+}
+
+.text-capacity {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: green;
+}

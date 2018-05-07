@@ -1,0 +1,11 @@
+.comment {
+  font-size: 26rpx;
+  color: black;
+  padding-top: 10rpx;
+}
+.reply {
+  font-size: 26rpx;
+  color: blue;
+  padding-top: 10rpx;
+  text-align: right;
+}

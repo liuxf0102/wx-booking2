@@ -1,0 +1,7 @@
+/* page/booking/qrBookingDetails.wxss */
+.booking-memo{
+  color:blue;
+}
+button::after {
+  border: 0;
+}

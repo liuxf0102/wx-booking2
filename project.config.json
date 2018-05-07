@@ -1,0 +1,91 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.7.0",
+	"appid": "wx7c76d2fdd4f4b7db",
+	"projectname": "wx-booking2",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 1,
+			"list": [
+				{
+					"id": 0,
+					"name": "me",
+					"pathName": "page/me/me",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "扫码预约",
+					"pathName": "page/booking/qrBookingNew",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "help",
+					"pathName": "page/me/help",
+					"query": ""
+				},
+				{
+					"id": 3,
+					"name": "预约详细信息",
+					"pathName": "page/booking/qrBookingDetails",
+					"query": "bookingId=1077"
+				},
+				{
+					"id": 4,
+					"name": "memo",
+					"pathName": "page/booking/memo1",
+					"query": "bookingId=1090"
+				},
+				{
+					"id": 5,
+					"name": "Test",
+					"pathName": "page/test/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "详细信息",
+					"pathName": "page/booking/bookingDetails",
+					"query": "bookingId=1132"
+				},
+				{
+					"id": -1,
+					"name": "预约历史",
+					"pathName": "page/booking/qrBookingList",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "预约时间",
+					"pathName": "page/booking/qrBookingTime",
+					"query": ""
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,79 @@
+<!--pages/aboutme/aboutmyInfo.wxml-->
+<view class="container">
+  <view class="graySpace"></view>
+
+  <view class="weui-cell" hover-class="weui-cell_active">
+    <view class="weui-cell__hd">
+      <image class="image" src="{{myInfo.icon}}" bindtap="bindQrcode" />
+    </view>
+    <view class="weui-cell__bd">
+      <view>{{myInfo.real_name}}</view>
+      <view style="font-size: 13px;color: #888888;">ID:{{myInfo.userid}}-{{myInfo.nick_name}}</view>
+    </view>
+    <view class="weui-cell__ft">
+      <view>{{version}}</view>
+      <view></view>
+    </view>
+  </view>
+
+  <view class="graySpace"></view>
+  <view class="item-avatar-xs" id="real_name" bindtap="bindUpdateMyInfo">
+    <view>
+      <text class="title">姓名:</text>
+      <text class="content">{{myInfo.real_name}}</text>
+    </view>
+  </view>
+  <view class="item-avatar-xs" bindtap="bindUpdateMyInfo">
+
+    <view>
+      <text class="title">电话:</text>
+      <text class="content">{{myInfo.mobile}}</text>
+    </view>
+  </view>
+  <view class="item-avatar-xs" bindtap="bindUpdateMyInfo">
+    <view>
+      <text class="title">地址:</text>
+      <text class="content">{{myInfo.job_location}}
+        </text>
+    </view>
+  </view>
+
+
+  <view class="graySpace"></view>
+ <view class="item-avatar-xs" bindtap="bindQrcode">
+    <view>
+      <text class="title">我的二维码:</text>
+      <text class="content"></text>
+    </view>
+  </view>
+  <view class="graySpace"></view>
+  <view class="item-avatar-xs" bindtap="bindHelp">
+    <view>
+      <text class="title">帮助中心:</text>
+      <text class="content"></text>
+    </view>
+  </view>
+  <view class="item-avatar-xs" bindtap="bindComment">
+    <view>
+      <text class="title">建议与意见:</text>
+      <text class="content"></text>
+    </view>
+  </view>
+  <view class="item-avatar-xs" bindtap="bindAbout">
+    <view>
+      <text class="title">关于预约本:</text>
+      <text class="content">{{version}}</text>
+    </view>
+  </view>
+  <view class="space_30rpx"></view>
+  <view class="space_30rpx"></view>
+  <view class="space_30rpx"></view>
+  <view class="weui-footer">
+    <view class="weui-footer__links">
+      <navigator url="/page/me/help" class="weui-footer__link">使用说明</navigator>
+      <navigator url="/page/me/comment" class="weui-footer__link">联系我们</navigator>
+    </view>
+    <view class="weui-footer__text">Copyright © 2018-2020 预约本乙方</view>
+  </view>
+  <view class="space_30rpx"></view>
+</view>

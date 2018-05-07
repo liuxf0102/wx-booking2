@@ -1,0 +1,43 @@
+
+<view class="page">
+
+<view class="graySpace"></view>
+  <view class="weui-cells weui-cells_after-title">
+
+    <view class="weui-cell {{item.bgcolor}}" hover-class="weui-cell_active bgcolor_1" wx:for="{{bookings}}" wx:key="{{item.id}}" data-bookingid="{{item.id}}" data-status="{{item.status}}" bindtap='tapBookingDetails' bindlongpress='longpressBooking'>
+      <view class="weui-cell__hd">
+        <image class="image" src="{{item.icon}}" data-userid="{{item.userid2}}" data-name="{{item.real_name}}" bindtap="selectedUserid2" />
+      </view>
+      <view class="weui-cell__bd">
+        <view data-bookingid="{{item.id}}" data-status="{{item.status}}">{{item.name_format}}</view>
+        <view data-bookingid="{{item.id}}" data-status="{{item.status}}" class="memo1">{{item.memo1_format}}</view>
+      </view>
+      <view class="weui-cell__ft" data-bookingid="{{item.id}}" data-status="{{item.status}}">
+        <view data-bookingid="{{item.id}}">
+          <text class="text-week">{{item.hour_format}}</text>
+        </view>
+        <view>
+          <text class="{{item.status_class}}">{{item.status_format}}</text>
+          <text class="{{item.prop_class_class}}">{{item.prop_class_format}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="graySpace"></view>
+  <view class="weui-btn-area">
+
+  </view>
+  <view class="space_30rpx"></view>
+  <view class="space_30rpx"></view>
+  <view class="space_30rpx"></view>
+  <view class="weui-footer">
+    <view class="weui-footer__links">
+      <navigator url="/page/me/help" class="weui-footer__link">使用说明</navigator>
+      <navigator url="/page/me/comment" class="weui-footer__link">联系我们</navigator>
+    </view>
+    <view class="weui-footer__text">Copyright © 2018-2020 预约本乙方{{version}}</view>
+    <view class="weui-footer__text text-red">{{versionTip}}</view>
+  </view>
+  <view class="space_900rpx"></view>
+
+</view>
