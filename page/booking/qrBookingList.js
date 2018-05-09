@@ -40,20 +40,22 @@ Page({
 
   server_getBookingList() {
 
+    
+    var that = this;
+    let userid2=getApp().globalData.userid2;
+    console.log("server_getBookingList userid:" + userid2);
+    if (userid2 == '') {
+      return;
+    }
     wx.showLoading({
       title: '数据加载中...',
     })
-    var that = this;
-    console.log("server_getBookingList userid:" + getApp().globalData.userid);
-    if (getApp().globalData.userid == '') {
-      return;
-    }
     //发起网络请求 restAPI dates
     wx.request({
       url: getApp().globalData.SERVER_URL + '/booking/list',
       method: 'post',
       data: {
-        userid2: getApp().globalData.userid,
+        userid2: userid2 ,
         linkedUserid: 'userid1'
       }, success: function (res) {
         //console.log(res);
@@ -239,16 +241,15 @@ Page({
 
     let myInfo = wx.getStorageSync('MY_INFO_2') || {};
     if (myInfo.userid) {
-      console.log("getUnionid userid from storage：" + myInfo.userid);
+      console.log("get userid from cache" + myInfo.userid);
       getApp().initGlobalData(myInfo);
       that.initConfig();
       that.server_getBookingList();
 
     } else {
       m_login.login(function (myInfo) {
-        //console.log("myInfo:"+JSON.stringify(myInfo));
-        console.log("init myInfo");
-        getApp().initGlobalData(myInfo);
+        console.log("get userid from db:"+JSON.stringify(myInfo));
+        getApp().globalData.userid2 = myInfo.userid;
         wx.setStorageSync('MY_INFO_2', myInfo);
         that.initConfig();
         that.server_getBookingList();
@@ -261,7 +262,7 @@ Page({
   },
 
   initConfig: function () {
-    let nickName = getApp().globalData.nickName;
+    let nickName = getApp().globalData.userNickName;
     console.log("nickName:" + nickName);
     let that = this;
     wx.request({
@@ -381,6 +382,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.setStorageSync('MY_INFO_2', {});
     wx.reLaunch({
       url: '/page/booking/qrBookingList',
     })

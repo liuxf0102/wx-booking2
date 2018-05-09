@@ -60,7 +60,7 @@ Page({
     })
 
 
-   
+
     let scene = decodeURIComponent(options.scene);
     //console.log("scene:" + typeof scene);
     if (typeof scene !== 'undefined' && scene !== 'undefined') {
@@ -70,34 +70,27 @@ Page({
       this.pageScene = options.userid1;
     }
     console.log("scene:" + this.pageScene);
-    let myInfo = wx.getStorageSync('MY_INFO_2') || {};
-    if (myInfo.userid) {
-      console.log("getUnionid userid from storage.");
-      getApp().initGlobalData(myInfo);
+
+
+    m_login.login(function (myInfo) {
+
+
+      getApp().globalData.userid2 = myInfo.userid;
+      console.log("get userid2 from db :" + getApp().globalData.userid2);
       let userInfo2MobileIsReady = false;
       if (myInfo.mobile.length > 0) {
         userInfo2MobileIsReady = true;
       }
-      this.setData({
+      let dbRealName = myInfo.real_name;
+      that.setData({
         myInfo: myInfo,
+        real_name: dbRealName,
         userInfo2MobileIsReady: userInfo2MobileIsReady
       });
+      wx.setStorageSync('MY_INFO_2', myInfo);
 
+    });
 
-    } else {
-      m_login.login(function (myInfo) {
-
-
-        let userInfo2MobileIsReady = false;
-        if (myInfo.mobile.length > 0) {
-          userInfo2MobileIsReady = true;
-        }
-        that.setData({
-          userInfo2MobileIsReady: userInfo2MobileIsReady
-        });
-
-      });
-    }
     if (options.selectedTime) {
       this.pageSelectedTime = options.selectedTime;
       console.log("this.pageSelectedTime:" + this.pageSelectedTime);
@@ -122,7 +115,7 @@ Page({
     }
   },
   initConfig: function () {
-    let nickName = getApp().globalData.nickName;
+    let nickName = getApp().globalData.userNickName;
     console.log("nickName:" + nickName);
     let that = this;
     wx.request({
@@ -159,7 +152,7 @@ Page({
       if (scenes.length >= 1) {
         page_userid1 = scenes[0];
       }
-      console.log("userid1:" +page_userid1);
+      console.log("userid1:" + page_userid1);
       //get userinfo info by userid
       wx.request({
         url: getApp().globalData.SERVER_URL + '/user/getUserInfoByUserid',
@@ -211,7 +204,7 @@ Page({
     } else {
       wx.showModal({
         title: '系统提示',
-        content: '没有扫描到预约信息，将返回到预约本小程序主页',
+        content: '没有扫描到预约信息，将返回到预约本乙方小程序主页',
         showCancel: false,
         success: function (res) {
           if (res.confirm) {
@@ -291,10 +284,11 @@ Page({
       })
       return;
     }
-    if (this.data.memo2 == "") {
+
+    if (that.data.real_name == "") {
       wx.showModal({
         title: '系统提示：',
-        content: '请输入预约留言，方便预约甲方审核通过。',
+        content: '请输入你的姓名.',
       })
       return;
     }
@@ -317,7 +311,7 @@ Page({
             method: 'post',
             data: {
               userid1: that.data.userInfo1.userid,
-              userid2: getApp().globalData.userid,
+              userid2: getApp().globalData.userid2,
               status: 0,//default status is approved
               year: that.data.year,
               month: that.data.month,
@@ -361,28 +355,13 @@ Page({
               url: getApp().globalData.SERVER_URL + '/user/update',
               method: 'put',
               data: {
-                userid: getApp().globalData.userid,
+                userid: getApp().globalData.userid2,
                 real_name: that.data.real_name,
                 mobile: that.data.mobile
               },
               success: function (res) {
                 console.log("userid2:" + res.data[0].userid);
-                //reload userInfo
-                m_login.login(function (myInfo) {
-                  getApp().initGlobalData(myInfo);
-
-                  let userInfo2MobileIsReady = false;
-                  if (myInfo.mobile.length > 0) {
-                    userInfo2MobileIsReady = true;
-                  }
-                  that.setData({
-                    myInfo: myInfo,
-                    userInfo2MobileIsReady: userInfo2MobileIsReady
-                  });
-                  //set myInfo 2 storage
-                  wx.setStorageSync('MY_INFO', myInfo);
-                });
-
+                getApp().reloadUserInfo();
               }
             });
           }
@@ -405,14 +384,15 @@ Page({
       method: 'post',
       data: {
         mobile: mobile,
+        appid: getApp().globalData.APPID
       },
       success: function (res) {
         var result = res.data[0].result;
         var mobileUserInfo = res.data[0].myInfo;
-        //console.log("mobileUserInfo:" + JSON.stringify(mobileUserInfo));
+        console.log("result:" + result);
 
         if (result === 'success') {
-          if (mobileUserInfo.unionid == '' && that.data.myInfo.mobile == '') {
+          if (mobileUserInfo.openid == '' && that.data.myInfo.mobile == '') {
             //show mobile userinfo and merge userInfo
             wx.showModal({
               title: '信息确认',
@@ -427,15 +407,15 @@ Page({
                   );
                   //merge userinfo
                   wx.request({
-                    url: getApp().globalData.SERVER_URL + '/user/mergeUnionid2mobileid',
+                    url: getApp().globalData.SERVER_URL + '/user/mergeOpenid2mobileid',
                     method: 'put',
                     data: {
                       userid: mobileUserInfo.userid,
-                      unionid: getApp().globalData.unionid,
                       openid: getApp().globalData.openid,
                       nick_name: getApp().globalData.nickName,
                       icon: getApp().globalData.icon,
-                      gender: getApp().globalData.gender
+                      gender: getApp().globalData.gender,
+                      appid: getApp().globalData.APPID
                     },
                     success: function (res) {
                       //console.log("userid:" + res.data[0].userid);
@@ -446,7 +426,7 @@ Page({
                       );
                       wx.showModal({
                         title: '系统提示',
-                        content: '更新手机号成功',
+                        content: '关联手机号成功',
                         showCancel: false
 
                       });
@@ -559,6 +539,43 @@ Page({
     //console.log("formid:"+e.detail.formid);
     let formid = e.detail.formId;
     getApp().formidCollect(formid);
+  },
+  getUserInfo: function (e) {
+    console.log("getUserInfo:" + JSON.stringify(e));
+    console.log("getUserInfo nickName:" + e.detail.userInfo.nickName);
+    console.log("getUserInfo avatarUrl:" + e.detail.userInfo.avatarUrl);
+    console.log("getUserInfo gender:" + e.detail.userInfo.gender);
+    let userid = getApp().globalData.userid2;
+    let nickName = getApp().globalData.userNickName;
+    let icon = getApp().globalData.userAvatarUrl;
+    let gender = getApp().globalData.userGender;
+
+    console.log("db userInfo userid:" + userid);
+    console.log("db userInfo nickName:" + nickName);
+
+    if (nickName == '' || icon == '' || gender == '') {
+      wx.request({
+        url: getApp().globalData.SERVER_URL + '/user/update',
+        method: 'put',
+        data: {
+          userid: userid,
+          nick_name: e.detail.userInfo.nickName,
+          icon: e.detail.userInfo.avatarUrl,
+          gender: e.detail.userInfo.gender
+
+        },
+        success: function (res) {
+          console.log("userid:" + res.data[0].userid);
+
+          getApp().reloadUserInfo();
+
+
+        }
+      });
+    }
+
+
+
   },
   /**
    * 生命周期函数--监听页面显示

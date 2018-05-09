@@ -128,7 +128,6 @@ Page({
     m_login.login(function (myInfo) {
       console.log("getUnionid userid from server db：" + JSON.stringify(myInfo));
       console.log("init myInfo");
-      getApp().initGlobalData(myInfo);
       wx.setStorageSync('MY_INFO_2', myInfo);
       that.setData({
         myInfo: myInfo
