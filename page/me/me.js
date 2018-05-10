@@ -18,7 +18,7 @@ Page({
     let myInfo = wx.getStorageSync('MY_INFO_2') || {};
     let that = this;
     if (myInfo.userid) {
-      console.log("getUnionid userid from storage：" +JSON.stringify(myInfo));
+      console.log("get userid from cache：" +JSON.stringify(myInfo));
       getApp().initGlobalData(myInfo);
       
 

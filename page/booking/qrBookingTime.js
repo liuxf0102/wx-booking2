@@ -120,8 +120,8 @@ Page({
       title: '数据加载中...',
     })
     var that = this;
-    //console.log("server_getUserRotaList userid:" + getApp().globalData.userid);
-    if (getApp().globalData.userid == '') {
+    console.log("server_getUserRotaList userid1:" + page_userid1);
+    if (page_userid1 == '') {
       return;
     }
     //发起网络请求 restAPI dates
@@ -137,7 +137,7 @@ Page({
         //  bookings: res.data[0].data
         //});
         wx.setStorageSync("USERID1ROTA", res.data[0].data);
-        //  console.log("getUserRota finished:" + JSON.stringify(res.data[0].data));
+       // console.log("getUserRota finished:" + JSON.stringify(res.data[0].data));
         wx.stopPullDownRefresh();
         //that.setSelectedBookings();
         that.initDayFlag();
@@ -266,6 +266,7 @@ Page({
               bookItem.year = tmpFullDay[i].year;
               bookItem.month = tmpFullDay[i].month;
               bookItem.day = tmpFullDay[i].day;
+              bookItem.weekday = tmpFullDay[i].weekday;
               //console.log("tmpFullDay[i].day:" + tmpFullDay[i].day);
               bookItem.seletectedTime = tmpFullDay[i].year + "," + tmpFullDay[i].month + "," + tmpFullDay[i].day + "," + tmpHourConfig[h].h + "," + tmpFullDay[i].weekday;
               bookItem.week_format = util.formatWeekday(tmpFullDay[i].weekday);
@@ -391,9 +392,8 @@ Page({
     page_options = options;
     if (options.userid1) {
       page_userid1 = options.userid1;
-      that.server_getBookingList();
-      that.server_getUserRotaList();
       that.getUserid1Data();
+      
     }
     if (options.userid2) {
       page_userid2 = options.userid2;
@@ -410,7 +410,6 @@ Page({
     let that=this;
     let config = {};
     let timeCapacities = [];
-    console.log("userid1:" + page_userid1);
     //get userinfo info by userid
     wx.request({
       url: getApp().globalData.SERVER_URL + '/user/getUserInfoByUserid',
@@ -445,6 +444,10 @@ Page({
             timeCapacities = getApp().globalData.BOOKING_HOUR_CAPACITY_DEFAULT;
           }
           console.log("timeCapacities:" + JSON.stringify(timeCapacities));
+
+          that.server_getBookingList();
+          that.server_getUserRotaList();
+
           that.setData({
             hourConfig: timeCapacities
           });
@@ -466,7 +469,7 @@ Page({
     var curDate = new Date();
     curDate.setTime(theLongTime)
     //console.log("theCurrentPageLongTime:" + curDate);
-    var t = "选择预约时间:" + curDate.getFullYear() + "年" + (curDate.getMonth() + 1) + "月";
+    var t = "时间:" + curDate.getFullYear() + "年" + (curDate.getMonth() + 1) + "月";
 
     this.setData({
       curYear: curDate.getFullYear(),
