@@ -59,7 +59,7 @@ const initMyInfo = function (openid,callback) {
         //getApp().globalData.userid = res.data[0].myInfo.userid;
         //getApp().globalData.mobile = res.data[0].myInfo.mobile;
         let myInfo = res.data[0].myInfo;
-        
+        getApp().initGlobalData(myInfo);
 
         callback(myInfo);
         wx.hideLoading();

@@ -30,7 +30,7 @@
     </view>
   </view>
   <view class="weui-btn-area">
-    <button class="weui-btn" type="primary" disabled="{{!(buttonIsReady&&realNameIsReady&&mobileIsReady)}}" bindtap="bindUpdateUserInfo">更新数据</button>
+    <button class="weui-btn" type="primary" disabled="{{!(buttonIsReady&&realNameIsReady&&mobileIsReady)}}" bindtap="bindUpdateUserInfo"  open-type="getUserInfo" bindgetuserinfo="getUserInfo" >更新数据</button>
   </view>
   <view class="graySpace"></view>
   <view class="weui-btn-area">
