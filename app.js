@@ -3,6 +3,7 @@ const updateManager = wx.getUpdateManager();
 updateManager.onCheckForUpdate(function (res) {
   // 请求完新版本信息的回调
   console.log("checkForUpdate:" + res.hasUpdate);
+  getApp().updateVersion();
 })
 
 updateManager.onUpdateReady(function () {
@@ -20,8 +21,6 @@ updateManager.onUpdateReady(function () {
 })
 App({
   onLaunch: function () {
-    // update version
-    setTimeout(this.updateVersion, 6000);
     
   },
 
