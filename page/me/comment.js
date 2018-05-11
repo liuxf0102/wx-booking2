@@ -33,7 +33,8 @@ Page({
       url: getApp().globalData.SERVER_URL + '/comment/list',
       method: 'post',
       data: {
-        status:this.data.status
+        status:this.data.status,
+        appid:getApp().globalData.APPID
       }, success: function (res) {
         //console.log(res);
         //that.setData({
@@ -82,6 +83,7 @@ Page({
       url: getApp().globalData.SERVER_URL + '/comment/create',
       method: 'post',
       data: {
+        appid: getApp().globalData.APPID,
         userid2: getApp().globalData.userid,
         comment: that.data.comment,
 

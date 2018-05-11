@@ -138,7 +138,10 @@
     <button form-type="submit" class="weui-btn" type="primary" bindtap="bindGoBack">返回</button>
   </view>
   <view class="text-blue">
-  提示:通过向左右滑动，可以选择上一周或下一周的预约时间。点击页面顶部日期，可以实现是否只显示当前周某一天的预约时间。</view>
+  <view>1.左右滑动，选择上或下一周的预约时间。</view>
+  <view>2.点击顶部日期，是否只显某一天预约列表。</view>
+
+  </view>
   <view class="space_30rpx"></view>
   <view class="space_30rpx"></view>
   <view class="weui-footer">
