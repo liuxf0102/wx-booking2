@@ -34,13 +34,12 @@ Page({
         that.setData({
           buttonIsReady: false
         });
-        //set userid 2 Storage
-        wx.showToast({
-          title: '更新用户信息成功',
-        });
-
         getApp().reloadUserInfo();
-
+        wx.showModal({
+          title: '系统提示',
+          content: '更新用户信息成功。',
+          showCancel: false
+        })
 
       }
     });
@@ -221,7 +220,14 @@ Page({
         console.log("userid:" + res.data[0].userid);
 
         getApp().reloadUserInfo();
-
+        wx.showModal({
+          title: '系统提示',
+          content: '同步微信头像和昵称成功。',
+          showCancel: false
+        })
+        that.setData({
+          buttonIsReady: false
+        });
 
       }
     });
@@ -243,7 +249,7 @@ Page({
   * 页面相关事件处理函数--监听用户下拉动作
   */
   onPullDownRefresh: function () {
-   wx.stopPullDownRefresh();
+    wx.stopPullDownRefresh();
 
 
   },

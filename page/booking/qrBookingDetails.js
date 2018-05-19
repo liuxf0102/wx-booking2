@@ -95,7 +95,7 @@ Page({
   },
   tapBooking: function () {
     var that = this;
-    if (getApp().globalData.userid == '') {
+    if (getApp().globalData.userid2 == '') {
       return;
     }
     //only for apply status

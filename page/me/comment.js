@@ -15,7 +15,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(getApp().globalData.userid==999){
+    let userid2=getApp().globalData.userid2;
+    console.log("userid2:"+userid2);
+    if (userid2<1000){
       this.setData({status:0});
     }
     this.server_getCommentList();
@@ -84,7 +86,7 @@ Page({
       method: 'post',
       data: {
         appid: getApp().globalData.APPID,
-        userid2: getApp().globalData.userid,
+        userid2: getApp().globalData.userid2,
         comment: that.data.comment,
 
       },
@@ -109,7 +111,7 @@ Page({
   },
   bindReply: function (e) {
     //console.log("bindReply:e:" + JSON.stringify(e));
-    if (getApp().globalData.userid == '999') {
+    if (getApp().globalData.userid2 < 1000) {
       wx.navigateTo({
         url: '/page/me/reply?id=' + e.currentTarget.dataset.id,
       })

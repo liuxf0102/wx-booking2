@@ -3,7 +3,7 @@ const updateManager = wx.getUpdateManager();
 updateManager.onCheckForUpdate(function (res) {
   // 请求完新版本信息的回调
   console.log("checkForUpdate:" + res.hasUpdate);
-  getApp().updateVersion();
+  
 })
 
 updateManager.onUpdateReady(function () {
@@ -22,42 +22,6 @@ updateManager.onUpdateReady(function () {
 App({
   onLaunch: function () {
     
-  },
-
-  userInfoReadyCallback: function (res) {
-    console.log("userInfoReadyCallback");
-    this.globalData.userInfo = res.userInfo;
-  },
-
-  updateVersion: function () {
-    
-    
-    let userid = "";
-
-    try{
-      userid = getApp().globalData.userid2;
-    }catch(e){
-      console.error("get uesrid "+userid);
-    }
-    console.log("updateVersion,userid:" + userid + ":" + getApp().globalData.version) ;
-
-    if (userid != "") {
-
-      //发起网络请求 
-      wx.request({
-        url: getApp().globalData.SERVER_URL + '/user/update',
-        method: 'put',
-        data: {
-          userid: userid,
-          version: getApp().globalData.version
-        },
-        success: function (res) {
-          //console.log("userid:" + res.data[0].userid);
-        }
-      });
-
-    }
-
   },
 
   reloadUserInfo: function () {
@@ -124,7 +88,7 @@ App({
     wx.request({
       url: getApp().globalData.SERVER_URL + '/user/appendFormids',
       data: {
-        userid: getApp().globalData.userid,
+        userid: getApp().globalData.userid2,
         formids: JSON.stringify(getApp().globalData.formids)
 
       },
@@ -151,7 +115,7 @@ App({
 
   },
   globalData: {
-    version: "V3.0.4",
+    version: "V3.1.1",
     APPID: 1,
     formids: [],
     userInfo: null,

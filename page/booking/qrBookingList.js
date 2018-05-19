@@ -104,7 +104,7 @@ Page({
     for (var i = 0; i < bookings_all.length; i++) {
 
       let theBookingDay = new Date(bookings_all[i].year + "/" + bookings_all[i].month + "/" + bookings_all[i].day);
-      bookings_all[i].hour_format = bookings_all[i].month + '月' + bookings_all[i].day + '号' + util.formatWeekday(bookings_all[i].weekday) + util.formatHour(bookings_all[i].hour);
+      bookings_all[i].hour_format = bookings_all[i].month + '月' + bookings_all[i].day + '号' ;
       bookings_all[i].status_format = util.formatBookingStatus(bookings_all[i].status);
       let status_class = "text-status";
       if (bookings_all[i].status == 4)//status is finished
