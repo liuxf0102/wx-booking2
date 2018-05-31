@@ -9,6 +9,7 @@ var page_bookingPendingCountMap = new Map();
 var page_bookingApprovedCountMap = new Map();
 var page_source = "";
 var page_options="";
+var page_dayHourCapacity = [];
 Page({
 
   theCurrentPageLongTime: 0,
@@ -212,6 +213,13 @@ Page({
       //  console.log("");
       if (!this.data.showWeekData) {
         if (tmpFullDay[i].weekday == selectedWeekday) {
+          let strHourCapacity = page_dayHourCapacity[tmpFullDay[i].weekday - 1];
+          console.log("strHourCapacity" + strHourCapacity);
+          if (strHourCapacity != '') {
+            tmpHourConfig = JSON.parse(strHourCapacity).hour_capacity
+          } else {
+            tmpHourConfig = this.data.hourConfig;
+          }
           for (let h = 0; h < tmpHourConfig.length; h++) {
 
             //console.log("h:"+h);
@@ -223,7 +231,7 @@ Page({
             console.log("tmpFullDay:" + JSON.stringify(tmpFullDay[i]));
             if (tmpFullDay[i].weekday > 5) {
               isWorkday = false;
-              if (this.data.dayFlag[tmpFullDay[i].weekday - 1] == "班") {
+              if (this.data.dayFlag[tmpFullDay[i].weekday - 1] == "班" || this.data.dayFlag[tmpFullDay[i].weekday - 1] == "自") {
                 isWorkday = true;
               }
             } else {
@@ -276,15 +284,24 @@ Page({
         }
       } else {
         for (let h = 0; h < tmpHourConfig.length; h++) {
+
           let currentDate = new Date();
           let keyCurrent = currentDate.getFullYear() + "-" + util.formatNumber((currentDate.getMonth() + 1)) + "-" + util.formatNumber(currentDate.getDate()) + "-" + util.formatNumber(currentDate.getHours());
           let key = tmpFullDay[i].year + "-" + util.formatNumber(tmpFullDay[i].month) + "-" + util.formatNumber(tmpFullDay[i].day) + "-" + util.formatNumber(tmpHourConfig[h].h);
+
+          let strHourCapacity = page_dayHourCapacity[tmpFullDay[i].weekday - 1];
+          console.log("strHourCapacity" + strHourCapacity);
+          if (strHourCapacity != '') {
+            tmpHourConfig = JSON.parse(strHourCapacity).hour_capacity
+          } else {
+            tmpHourConfig = this.data.hourConfig;
+          }
           //  console.log("key:" + key + " keyCurrent:" + keyCurrent);
           let isWorkday = true;
           // console.log("tmpFullDay:" + JSON.stringify(tmpFullDay[i]));
           if (tmpFullDay[i].weekday > 5) {
             isWorkday = false;
-            if (this.data.dayFlag[tmpFullDay[i].weekday - 1] == "班") {
+            if (this.data.dayFlag[tmpFullDay[i].weekday - 1] == "班" || this.data.dayFlag[tmpFullDay[i].weekday - 1] == "自") {
               isWorkday = true;
             }
           } else {
@@ -666,6 +683,7 @@ Page({
     //get rota from storage
     let rota_all = wx.getStorageSync("USERID1ROTA") || [];
     let tmpDayFlag = ['', '', '', '', '', '', ''];
+    let tmpDayHourCapacity = ['', '', '', '', '', '', ''];
     for (let i = 0; i < rota_all.length; i++) {
 
       let theRotaDay = new Date(rota_all[i].day);
@@ -677,12 +695,17 @@ Page({
           if (tmpDay[t] == theRotaDay.getDate()) {
             //console.log("tmpDay[]:" +t+":"+ tmpDay[t]);
             tmpDayFlag[t] = rota_all[i].flag;
+            tmpDayHourCapacity[t] = rota_all[i].memo;
           }
         }
 
       }
 
     }
+
+    page_dayHourCapacity = tmpDayHourCapacity;
+    // console.log("tmpDayFlag:" + tmpDayFlag.join(" "));
+    console.log("dayHourCapacity:" + JSON.stringify(page_dayHourCapacity));
     // console.log("tmpDayFlag:" + tmpDayFlag.join(" "));
     this.setData({
       dayFlag: tmpDayFlag
