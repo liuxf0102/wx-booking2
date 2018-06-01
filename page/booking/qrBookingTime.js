@@ -47,7 +47,7 @@ Page({
     time: '0:0',
     buttonDisabled: true,
     showWeekData: true,
-    hourConfig: [{ 'h': 8, 'c': 1 }, { 'h': 18, 'c': 4 }],
+    hourConfig: [],
   },
 
   server_getBookingList() {
@@ -391,6 +391,8 @@ Page({
         bookings: bookItems
       }
     );
+
+    
     wx.hideLoading();
   },
 
@@ -695,7 +697,11 @@ Page({
           if (tmpDay[t] == theRotaDay.getDate()) {
             //console.log("tmpDay[]:" +t+":"+ tmpDay[t]);
             tmpDayFlag[t] = rota_all[i].flag;
+            if (rota_all[i].flag=="自"){
             tmpDayHourCapacity[t] = rota_all[i].memo;
+            }else{
+              tmpDayHourCapacity[t] = "";
+            }
           }
         }
 

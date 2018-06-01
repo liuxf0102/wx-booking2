@@ -115,7 +115,7 @@ App({
 
   },
   globalData: {
-    version: "V3.1.2",
+    version: "V3.1.3",
     APPID: 1,
     formids: [],
     userInfo: null,
