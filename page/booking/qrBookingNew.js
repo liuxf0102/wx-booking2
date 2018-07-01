@@ -303,7 +303,23 @@ Page({
             buttonIsReady: false
           });
 
-
+          let userInfo1 = wx.getStorageSync('USERID1_INFO');
+          let needApproval = true;
+          let strConfig = userInfo1.config;
+          if (strConfig == '') {
+            strConfig = "{}";
+          }
+          console.log("config:" + strConfig);
+          let config = JSON.parse(strConfig);
+          if (config.hasOwnProperty("need_approval")) {
+            console.log("need_approval:" + config.need_approval);
+            needApproval = config.need_approval;
+          }
+          let status=0; //need approval
+          if (!needApproval)
+          {
+            status=1; //aproved
+          }
           //check mobile 
           //发起网络请求 restAPI add new booking to database;
           wx.request({
@@ -312,7 +328,7 @@ Page({
             data: {
               userid1: that.data.userInfo1.userid,
               userid2: getApp().globalData.userid2,
-              status: 0,//default status is approved
+              status: status,
               year: that.data.year,
               month: that.data.month,
               day: that.data.day,
